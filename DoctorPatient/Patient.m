@@ -7,10 +7,11 @@
 //
 
 #import "Patient.h"
+#import "Doctor.h"
 
 @implementation Patient
 
-- (instancetype)initWithName:(NSString *)name Age:(NSNumber *)age ValidHealthCard:(BOOL)validHealthCard
+- (instancetype)initWithName:(NSString *)name Age:(NSNumber *)age ValidHealthCard:(BOOL)validHealthCard Symptoms:(NSArray *)symptoms
 {
     self = [super init];
     if (self) {
@@ -18,6 +19,8 @@
         _name = name;
         _age = age;
         _validHealthCard = validHealthCard;
+        _symptoms = symptoms;
+        
         
     }
     
@@ -51,8 +54,21 @@
         
     }
     
-   
+}
+
+- (void)requestMedication:(Doctor *)doctor{
+
+    [doctor prescribeMedication:self];
+    
     
 }
+
+
+
+
+
+
+
+
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "Doctor.h"
+#import "Patient.h"
 
 @implementation Doctor
 
@@ -20,6 +21,10 @@
         _name = name;
         _specialization = specialization;
         _patientList = [[NSMutableArray alloc] init];
+        _prescriptions = @{@"headache":@"aspirin",
+                           @"fever":@"tylenol",
+                           @"cough":@"cough drops",};
+        _prescriptionGivenList = [[NSMutableDictionary alloc] init];
         
     }
     
@@ -42,28 +47,37 @@
     }
 }
 
--(void)treatPatient:(Patient *)patient {
+- (void)treatPatient:(Patient *)patient {
     
     if ([self canTreatPatient:patient]) {
         
         [self.patientList addObject:patient];
         
+        
     }
 }
 
-//-(BOOL)visitDoctor:(Patient *) patient
-//{
-//    if([self canTreatPatient:patient])
-//    {
-//        NSLog(@" ");
-//        return YES;
-//    }
-//    else
-//    {
-//        NSLog(@" ");
-//        return NO;
-//    }
-//}
+-(void)prescribeMedication:(Patient *)patient {
+    
+    if ([self canTreatPatient:patient]) {
+        
+        NSArray *array = [[NSArray alloc] init];
+        
+        for (NSString *symptom in patient.symptoms) {
+            
+            NSString *prescription = [self.prescriptions objectForKey:symptom];
+            
+            NSLog(@"You should take %@", prescription);
+            
+            array = [array arrayByAddingObject:prescription];
+            
+            }
+        
+        self.prescriptionGivenList[patient.name] = [self.prescriptionGivenList[patient.name] arrayByAddingObjectsFromArray:array];
+        
+    }
+        
+}
 
 
 
