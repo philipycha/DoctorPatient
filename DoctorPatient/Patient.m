@@ -10,7 +10,7 @@
 
 @implementation Patient
 
-- (instancetype)initWithName:(NSString *)name Age:(NSNumber *)age ValidHealthCard:(NSString *)validHealthCard
+- (instancetype)initWithName:(NSString *)name Age:(NSNumber *)age ValidHealthCard:(BOOL)validHealthCard
 {
     self = [super init];
     if (self) {
@@ -20,22 +20,39 @@
         _validHealthCard = validHealthCard;
         
     }
+    
     return self;
 }
 
 - (BOOL)isValidHealthCard{
     
-    if (self.validHealthCard == nil) {
+    if (!self.validHealthCard) {
         
         NSLog(@"invalid health card");
+        
         return NO;
         
     } else {
         
         NSLog(@"health card valid");
+        
         return YES;
         
     }
+}
+
+- (void)visitDoctor:(Doctor *)doctor{
+    
+    if ([doctor canTreatPatient:self]) {
+        
+        [doctor treatPatient:self];
+        
+        NSLog(@"Go to doctor");
+        
+    }
+    
+   
+    
 }
 
 @end

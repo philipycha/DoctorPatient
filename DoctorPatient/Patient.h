@@ -13,11 +13,12 @@
 
 @property (nonatomic, strong) NSString * name;
 @property (nonatomic, strong) NSNumber * age;
-@property (nonatomic, strong) NSString * validHealthCard;
+@property (nonatomic, assign) BOOL validHealthCard;
 
+- (instancetype)initWithName:(NSString *)name Age:(NSNumber *)age ValidHealthCard:(BOOL)validHealthCard;
 
-//-(void)visitDoctor;
-- (BOOL)isValidHealthCard
+- (BOOL)isValidHealthCard;
+- (void)visitDoctor:(Doctor *)doctor;
 
 
 @end
